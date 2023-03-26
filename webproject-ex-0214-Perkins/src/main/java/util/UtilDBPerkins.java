@@ -10,7 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import datamodel.Employee;
+import datamodel.EmployeePerkins;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -19,7 +19,7 @@ import org.hibernate.Transaction;
 /**
  * @since JavaSE-1.8
  */
-public class UtilDB {
+public class UtilDBPerkins {
    static SessionFactory sessionFactory = null;
 
    public static SessionFactory getSessionFactory() {
@@ -32,17 +32,17 @@ public class UtilDB {
       return sessionFactory;
    }
 
-   public static List<Employee> listEmployees() {
-      List<Employee> resultList = new ArrayList<Employee>();
+   public static List<EmployeePerkins> listEmployees() {
+      List<EmployeePerkins> resultList = new ArrayList<EmployeePerkins>();
 
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
 
       try {
          tx = session.beginTransaction();
-         List<?> employees = session.createQuery("FROM Employee").list();
+         List<?> employees = session.createQuery("FROM EmployeePerkins").list();
          for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
-            Employee employee = (Employee) iterator.next();
+            EmployeePerkins employee = (EmployeePerkins) iterator.next();
             resultList.add(employee);
          }
          tx.commit();
@@ -56,17 +56,17 @@ public class UtilDB {
       return resultList;
    }
 
-   public static List<Employee> listEmployees(String keyword) {
-      List<Employee> resultList = new ArrayList<Employee>();
+   public static List<EmployeePerkins> listEmployees(String keyword) {
+      List<EmployeePerkins> resultList = new ArrayList<EmployeePerkins>();
 
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
 
       try {
          tx = session.beginTransaction();
-         List<?> employees = session.createQuery("FROM Employee").list();
+         List<?> employees = session.createQuery("FROM EmployeePerkins").list();
          for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
-            Employee employee = (Employee) iterator.next();
+            EmployeePerkins employee = (EmployeePerkins) iterator.next();
             if (employee.getName().startsWith(keyword)) {
                resultList.add(employee);
             }
@@ -82,12 +82,12 @@ public class UtilDB {
       return resultList;
    }
 
-   public static void createEmployees(String userName, String age) {
+   public static void createEmployees(String userName, String age, String phone) {
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
-         session.save(new Employee(userName, Integer.valueOf(age)));
+         session.save(new EmployeePerkins(userName, Integer.valueOf(age), phone));
          tx.commit();
       } catch (HibernateException e) {
          if (tx != null)
