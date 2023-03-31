@@ -14,11 +14,6 @@ class Edge extends Graph {
 }
 
 public class A {
-	public static void main(String[] args) {
-		A a = new A();
-		a.m1(null, null);
-		a.m2(null, null);
-	}
 	
    Node m1(List<Node> nodes, String p) {
       extractedMethod(nodes, p);
