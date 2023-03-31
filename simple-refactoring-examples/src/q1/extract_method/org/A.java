@@ -3,11 +3,6 @@ package q1.extract_method.org;
 import java.util.List;
 
 public class A {
-	public static void main(String[] args) {
-		A a = new A();
-		a.m1(null, null);
-		a.m2(null, null);
-	}
 	
 	Node m1(List<Node> nodes, String p) {
 		for (Node node : nodes) {
